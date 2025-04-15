@@ -20,11 +20,12 @@ let lastRotation = 0;
 function getRandomRotation() {
   const segments = restaurants.length;
   const segmentDegree = 360 / segments;
-  // 增加随机性：基础旋转圈数 + 随机圈数 + 随机扇区
+  // 增加更细粒度的随机性
   const baseRotations = 5; // 基础旋转圈数
   const randomRotations = Math.floor(Math.random() * 3); // 0-2圈随机旋转
   const randomSegment = Math.floor(Math.random() * segments); // 随机扇区
-  return 360 * (baseRotations + randomRotations) + randomSegment * segmentDegree;
+  const randomOffset = Math.random() * segmentDegree; // 在扇区内随机偏移
+  return 360 * (baseRotations + randomRotations) + randomSegment * segmentDegree + randomOffset;
 }
 
 // 处理旋转逻辑
