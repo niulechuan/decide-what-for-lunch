@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f0f3ff;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -22,6 +22,10 @@ body {
   width: 300px;
   height: 300px;
   margin: 0 auto 30px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 /* 转盘主体 */
@@ -30,16 +34,17 @@ body {
   height: 100%;
   border-radius: 50%;
   background: conic-gradient(
-    #ff6b6b 0% 20%,
-    #4ecdc4 20% 40%,
-    #45b7d1 40% 60%,
-    #96ceb4 60% 80%,
-    #ffd93d 80% 100%
+    #FF6B6B 0% 20%,
+    #4ECDC4 20% 40%,
+    #45B7D1 40% 60%,
+    #96CEB4 60% 80%,
+    #FFD93D 80% 100%
   );
   position: relative;
   transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
   will-change: transform;
   z-index: 1;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 /* 转盘文字标签 */
@@ -50,9 +55,13 @@ body {
   transform-origin: 0 0;
   transform: rotate(calc(var(--angle))) translate(130px) rotate(-calc(var(--angle)));
   font-size: 14px;
+  font-weight: bold;
   color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 /* 响应式设计 */
@@ -82,44 +91,75 @@ body {
 /* 指针样式 */
 .pointer {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  background: #ff7675;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  top: 50%;
+  width: 30px;
+  height: 30px;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 2;
+}
+
+.pointer::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid #FF6B6B;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+}
+
+.pointer::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #FF6B6B;
+  border-radius: 50%;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* 旋转按钮 */
 .spin-btn {
-  padding: 8px 20px;
+  padding: 12px 30px;
   font-size: 16px;
-  background: #2d3436;
+  font-weight: bold;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
   color: white;
   border: none;
-  border-radius: 20px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
   position: absolute;
-  bottom: -30px;
+  bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .spin-btn:hover {
-  transform: scale(1.05);
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
 .spin-btn:active {
-  transform: scale(0.95);
+  transform: translateX(-50%) scale(0.95);
 }
 
 /* 结果展示 */
 .result {
-  margin-top: 30px;
+  margin-top: 40px;
   font-size: 24px;
+  font-weight: bold;
   color: #2d3436;
   min-height: 36px;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
